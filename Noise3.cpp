@@ -21,7 +21,7 @@ void Noise3::erase(void)
 void Noise3::copy(const Noise3 &noise)
 {
   erase();
-  
+
   l = noise.l;
   p = new Noise2 *[l];
 
@@ -39,7 +39,7 @@ Noise3::Noise3(int n, int m, int l)
   {
     this->l = l;
     this->p = new Noise2 *[l];
-    
+
     for (int i = 0; i < l; ++i)
       this->p[i] = new Noise2(n, m);
   }
@@ -66,13 +66,13 @@ double Noise3::noise(double x, double y, double z) const
 
   if (i == 0)
     return catmull_rom(p[l - 1]->noise(x, y), p[0]->noise(x, y),
-      p[1]->noise(x, y), p[2]->noise(x, y), t);
+    p[1]->noise(x, y), p[2]->noise(x, y), t);
   if (i < l - 2)
     return catmull_rom(p[i - 1]->noise(x, y), p[i]->noise(x, y),
-      p[i + 1]->noise(x, y), p[i + 2]->noise(x, y), t);
+    p[i + 1]->noise(x, y), p[i + 2]->noise(x, y), t);
   if (i == l - 2)
     return catmull_rom(p[l - 3]->noise(x, y), p[l - 2]->noise(x, y),
-      p[l - 1]->noise(x, y), p[0]->noise(x, y), t);
+    p[l - 1]->noise(x, y), p[0]->noise(x, y), t);
   return catmull_rom(p[l - 2]->noise(x, y), p[l - 1]->noise(x, y),
     p[0]->noise(x, y), p[1]->noise(x, y), t);
 }

@@ -322,24 +322,24 @@ static void GLFWCALL mouse(int button, int action)
 
   switch (button)
   {
-    case GLFW_MOUSE_BUTTON_LEFT:
-      if (action != GLFW_RELEASE)
-      {
-        // 左ボタン押下
-        tb.start(x, y);
-      }
-      else
-      {
-        // 左ボタン開放
-        tb.stop(x, y);
-      }
-      break;
-    case GLFW_MOUSE_BUTTON_MIDDLE:
-      break;
-    case GLFW_MOUSE_BUTTON_RIGHT:
-      break;
-    default:
-      break;
+  case GLFW_MOUSE_BUTTON_LEFT:
+    if (action != GLFW_RELEASE)
+    {
+      // 左ボタン押下
+      tb.start(x, y);
+    }
+    else
+    {
+      // 左ボタン開放
+      tb.stop(x, y);
+    }
+    break;
+  case GLFW_MOUSE_BUTTON_MIDDLE:
+    break;
+  case GLFW_MOUSE_BUTTON_RIGHT:
+    break;
+  default:
+    break;
   }
 }
 
@@ -354,36 +354,36 @@ static void GLFWCALL keyboard(int key, int action)
 
     switch (key)
     {
-      case GLFW_KEY_SPACE:
-        break;
-      case GLFW_KEY_BACKSPACE:
-      case GLFW_KEY_DEL:
-        break;
-      case GLFW_KEY_UP:
-        break;
-      case GLFW_KEY_DOWN:
-        break;
-      case GLFW_KEY_RIGHT:
-        break;
-      case GLFW_KEY_LEFT:
-        break;
-      case 'b':
-      case 'B':
-        blend = !blend;
-        if (blend)
-          glEnable(GL_BLEND);
-        else
-          glDisable(GL_BLEND);
-        break;
-      case 't':
-      case 'T':
-        break;
-      case GLFW_KEY_ESC:
-      case 'Q':
-      case 'q':
-        exit(0);
-      default:
-        break;
+    case GLFW_KEY_SPACE:
+      break;
+    case GLFW_KEY_BACKSPACE:
+    case GLFW_KEY_DEL:
+      break;
+    case GLFW_KEY_UP:
+      break;
+    case GLFW_KEY_DOWN:
+      break;
+    case GLFW_KEY_RIGHT:
+      break;
+    case GLFW_KEY_LEFT:
+      break;
+    case 'b':
+    case 'B':
+      blend = !blend;
+      if (blend)
+        glEnable(GL_BLEND);
+      else
+        glDisable(GL_BLEND);
+      break;
+    case 't':
+    case 'T':
+      break;
+    case GLFW_KEY_ESC:
+    case 'Q':
+    case 'q':
+      exit(0);
+    default:
+      break;
     }
   }
 }
