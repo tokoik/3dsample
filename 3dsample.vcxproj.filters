@@ -55,10 +55,10 @@
     <None Include="slice.vert">
       <Filter>シェーダー ファイル</Filter>
     </None>
-    <None Include="gradient.vert">
+    <None Include="gradient.frag">
       <Filter>シェーダー ファイル</Filter>
     </None>
-    <None Include="gradient.frag">
+    <None Include="gradient.vert">
       <Filter>シェーダー ファイル</Filter>
     </None>
   </ItemGroup>
