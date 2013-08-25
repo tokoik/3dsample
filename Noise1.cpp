@@ -24,11 +24,11 @@ static double xor128(void)
   static unsigned int z = 521288629;
   static unsigned int w = 88675123;
   unsigned int t = x ^ x << 11;
-  
+
   x = y;
   y = z;
   z = w;
-  
+
   return (double)(w ^= w >> 19 ^ t ^ t >> 8) / 4294967295.0;
 }
 
@@ -36,7 +36,7 @@ static double xor128(void)
 void Noise1::copy(const Noise1 &noise)
 {
   delete[] p;
-  
+
   n = noise.n;
   p = new double[n];
 
@@ -51,7 +51,7 @@ Noise1::Noise1(int n)
   {
     this->n = n;
     this->p = new double[n];
-    
+
     for (int i = 0; i < n; ++i)
       this->p[i] = xor128() - 0.5;
   }

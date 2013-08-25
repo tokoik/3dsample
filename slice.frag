@@ -23,4 +23,3 @@ void main(void)
   fc = vec4(v.rgb, (v.a - a) / (1.0 - a));
   if (fc.a < 0.0) discard;
 }
- 

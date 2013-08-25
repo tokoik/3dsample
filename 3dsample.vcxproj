@@ -87,8 +87,6 @@
     <ClInclude Include="Noise3.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="gradient.frag" />
-    <None Include="gradient.vert" />
     <None Include="slice.frag" />
     <None Include="slice.vert" />
   </ItemGroup>
