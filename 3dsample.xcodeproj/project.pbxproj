@@ -15,6 +15,8 @@
 		7D1F3150178F031B00C6703C /* Noise2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D1F314B178F031B00C6703C /* Noise2.cpp */; };
 		7D1F3151178F031B00C6703C /* Noise3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D1F314D178F031B00C6703C /* Noise3.cpp */; };
 		7D7AF85F1222C8CC003A0434 /* opengl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7D7AF85E1222C8CC003A0434 /* opengl.icns */; };
+		7D9E1FD017C9DD8C007B70AC /* gradient.vert in Resources */ = {isa = PBXBuildFile; fileRef = 7D9E1FCF17C9DD46007B70AC /* gradient.vert */; };
+		7D9E1FD117C9DD8F007B70AC /* gradient.frag in Resources */ = {isa = PBXBuildFile; fileRef = 7D9E1FCE17C9DD46007B70AC /* gradient.frag */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		7D1F314D178F031B00C6703C /* Noise3.cpp */ = {isa = PBXFileReference; fileEncoding = 8; lastKnownFileType = sourcecode.cpp.cpp; path = Noise3.cpp; sourceTree = "<group>"; };
 		7D1F314E178F031B00C6703C /* Noise3.h */ = {isa = PBXFileReference; fileEncoding = 8; lastKnownFileType = sourcecode.c.h; path = Noise3.h; sourceTree = "<group>"; };
 		7D7AF85E1222C8CC003A0434 /* opengl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = opengl.icns; sourceTree = "<group>"; };
+		7D9E1FCE17C9DD46007B70AC /* gradient.frag */ = {isa = PBXFileReference; fileEncoding = 8; lastKnownFileType = sourcecode.glsl; path = gradient.frag; sourceTree = "<group>"; };
+		7D9E1FCF17C9DD46007B70AC /* gradient.vert */ = {isa = PBXFileReference; fileEncoding = 8; lastKnownFileType = sourcecode.glsl; path = gradient.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				7D1F314D178F031B00C6703C /* Noise3.cpp */,
 				7D12DA2E17BE238700170B93 /* slice.vert */,
 				7D12DA2F17BE23A800170B93 /* slice.frag */,
+				7D9E1FCF17C9DD46007B70AC /* gradient.vert */,
+				7D9E1FCE17C9DD46007B70AC /* gradient.frag */,
 				7D1E90EF1123E36C005E6C75 /* Products */,
 				7D1E90F11123E36C005E6C75 /* Info.plist */,
 				7D7AF85E1222C8CC003A0434 /* opengl.icns */,
@@ -129,6 +135,8 @@
 				7D7AF85F1222C8CC003A0434 /* opengl.icns in Resources */,
 				7D12DA3017BE241700170B93 /* slice.vert in Resources */,
 				7D12DA3117BE241900170B93 /* slice.frag in Resources */,
+				7D9E1FD017C9DD8C007B70AC /* gradient.vert in Resources */,
+				7D9E1FD117C9DD8F007B70AC /* gradient.frag in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
