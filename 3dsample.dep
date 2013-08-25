@@ -1,0 +1,5 @@
+Noise1.o: Noise1.cpp Noise1.h
+Noise2.o: Noise2.cpp Noise2.h Noise1.h
+Noise3.o: Noise3.cpp Noise3.h Noise2.h Noise1.h
+gg.o: gg.cpp gg.h glfw.h glext.h
+main.o: main.cpp gg.h glfw.h glext.h Noise3.h Noise2.h Noise1.h

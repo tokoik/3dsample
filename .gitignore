@@ -1,0 +1,36 @@
+#
+# for Linux
+#
+*.o
+core
+a.out
+3dsample
+#
+# for Mac
+#
+.DS_Store
+*.xcodeproj/*
+!project.pbxproj
+*.xcuserdatad/
+build/
+DerivedData/
+#
+# for Windows
+#
+Thumbs.db
+*.com
+*.exe
+*.dll
+*.ncb
+*.suo
+*.vcproj.*.*.user
+*.sdf
+*.opensdf
+Debug/
+Release/
+ipch/
+#
+# anothre stuff
+#
+*~
+*.bak
