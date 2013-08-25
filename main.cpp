@@ -20,7 +20,7 @@ using namespace gg;
 #define NOISE       2
 #define PERLIN      3
 #define TURBULENCE  4
-#define PATTERN     CHECKER
+#define PATTERN     TURBULENCE
 
 // ÉXÉâÉCÉXêî
 #define SLICES    256
