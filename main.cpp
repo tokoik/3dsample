@@ -305,7 +305,7 @@ static void GLFWCALL resize(int w, int h)
   glViewport(0, 0, w, h);
 
   // 透視投影変換行列を求める（アスペクト比 w / h）
-  mp.loadPerspective(0.6f, (GLfloat)w / (GLfloat)h, 1.0f, 10.0f);
+  mp.loadPerspective(0.6f, static_cast<GLfloat>(w) / static_cast<GLfloat>(h), 1.0f, 10.0f);
 
   // トラックボール処理の範囲を設定する
   tb.region(w, h);
@@ -437,7 +437,7 @@ int main(int argc, const char * argv[])
   while (glfwGetWindowParam(GLFW_OPENED))
   {
     // マウスホイールの値
-    GLfloat a = (GLfloat)glfwGetMouseWheel() * 0.01f + 0.5f;
+    GLfloat a = static_cast<GLfloat>(glfwGetMouseWheel()) * 0.01f + 0.5f;
 
     // 画面クリア
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -462,7 +462,7 @@ int main(int argc, const char * argv[])
     glBindVertexArray(vao);
     for (int i = 0; i < SLICES; ++i)
     {
-      glUniform1f(zLoc, ((GLfloat)i + 0.5f) / (GLfloat)SLICES);
+      glUniform1f(zLoc, (static_cast<GLfloat>(i) + 0.5f) / static_cast<GLfloat>(SLICES));
       glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     }
 
