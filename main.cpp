@@ -224,7 +224,7 @@ static GLuint gradient(GLuint vao, GLuint volume, GLint width, GLint height, GLi
     glFramebufferTexture3D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, tex, 0, z);
 
     // 3D テクスチャをクリッピング空間を覆う矩形ポリゴンにマッピングしてレイヤに描画する
-    glUniform1f(zLoc, ((GLfloat)z + 0.5f) / (GLfloat)depth);
+    glUniform1f(zLoc, (static_cast<GLfloat>(z) + 0.5f) / static_cast<GLfloat>(depth));
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
   }  
 
