@@ -111,7 +111,7 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
           double py = 2.0 * y - 1.0;
           double pz = 2.0 * z - 1.0;
 
-          (*t)[3] = static_cast<GLubyte>(sqrt(px * px + py * py + pz * pz) * 255.0);
+          (*t)[3] = static_cast<GLubyte>(255.0 - sqrt(px * px + py * py + pz * pz) * 127.5);
         }
 
         ++t;
