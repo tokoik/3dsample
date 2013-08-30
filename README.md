@@ -1,14 +1,16 @@
 3dsample
 ========
 
-A trivial sample program for volume rendering using OpenGL
+このプログラムは OpenGL の 3D テクスチャを使った，
+非常に単純なボリュームレンダリングのサンプルプログラムです．
+Vine Linux 6，Mac OS X 10.8，および
+Windows 7/8 でコンパイルおよび実行を確認しています．
 
-このプログラムは OpenGL の 3D テクスチャを使った、非常に単純なサンプルプログラムです。
-Vine Linux 6、Mac OS X 10.8、Windows 7/8 でコンパイルおよび実行を確認しています。
-フレームワークとして GLFW を使用しており、Vine Linux 6 用の Makefile、
-Xcode 4 用のプロジェクトファイル、Visual Studio 2010 用のプロジェクトファイル、
-および、すぐにコンパイル・実行できるように、GLFW のコンパイル済みライブラリを含めています。
-ライセンスは GLFW の部分を除き、MIT ライセンスです。
+フレームワークとして GLFW を使用しており，Vine Linux 6 用の Makefile，
+Xcode 4 用のプロジェクトファイル，Visual Studio 2010 用のプロジェクトファイル，
+および，すぐにコンパイル・実行できるように，
+GLFW のコンパイル済みライブラリを含めています．
+ライセンスは GLFW の部分を除き，MIT ライセンスです．
 
 Copyright (c) 2013 Kohe Tokoi
 
