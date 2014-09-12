@@ -1,6 +1,7 @@
-#include <iostream>
-#include <cstdlib>
 #include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <vector>
 
 // 補助プログラム
 #include "gg.h"
@@ -65,9 +66,8 @@ static GLuint slice(void)
 //
 static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
 {
-  // 作業用メモリを確保する
-  GLubyte (*texture)[4] = new GLubyte[width * height * depth][4];
-  GLubyte (*t)[4] = texture;
+  // 作業用メモリ
+  std::vector<GLubyte> texture;
 
   // ノイズ関数を初期化する
   Noise3 noise(5, 5, 5);
@@ -84,26 +84,23 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
       for (GLint i = 0; i < width; ++i)
       {
         double x = (double)i / (double)width;
-
-        (*t)[0] = 160;
-        (*t)[1] = 160;
-        (*t)[2] = 160;
+        double t;
 
         if (pattern == CHECKER)
         {
-          (*t)[3] = ((i >> 4) + (j >> 4) + (k >> 4)) & 1 ? 0 : 255;
+          t = ((i >> 4) + (j >> 4) + (k >> 4)) & 1 ? 0 : 255;
         }
         else if (pattern == NOISE)
         {
-          (*t)[3] = static_cast<GLubyte>(noise.noise(x, y, z) * 255.0);
+          t = static_cast<GLubyte>(noise.noise(x, y, z) * 255.0);
         }
         else if (pattern == PERLIN)
         {
-          (*t)[3] = static_cast<GLubyte>(noise.perlin(x, y, z, 4, 0.5) * 255.0);
+          t = static_cast<GLubyte>(noise.perlin(x, y, z, 4, 0.5) * 255.0);
         }
         else if (pattern == TURBULENCE)
         {
-          (*t)[3] = static_cast<GLubyte>(noise.turbulence(x, y, z, 4, 0.5) * 255.0);
+          t = static_cast<GLubyte>(noise.turbulence(x, y, z, 4, 0.5) * 255.0);
         }
         else if (pattern == SPHERE)
         {
@@ -111,10 +108,13 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
           double py = 2.0 * y - 1.0;
           double pz = 2.0 * z - 1.0;
 
-          (*t)[3] = static_cast<GLubyte>(255.0 - sqrt(px * px + py * py + pz * pz) * 127.5);
+          t = static_cast<GLubyte>(255.0 - sqrt(px * px + py * py + pz * pz) * 127.5);
         }
 
-        ++t;
+        texture.push_back(160);
+        texture.push_back(160);
+        texture.push_back(160);
+        texture.push_back(t);
       }
     }
   }
@@ -129,7 +129,7 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
 
   // テクスチャを割り当てる
   glTexImage3D(GL_TEXTURE_3D, 0, GL_RGBA, width, height, depth, 0,
-    GL_RGBA, GL_UNSIGNED_BYTE, texture);
+    GL_RGBA, GL_UNSIGNED_BYTE, &texture[0]);
 
   // テクスチャの拡大・縮小に線形補間を用いる
   glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -145,9 +145,6 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
 
   // テクスチャの結合を解除する
   glBindTexture(GL_TEXTURE_3D, 0);
-
-  // 作業用メモリを解放する
-  delete[] texture;
 
   return tex;
 }
@@ -221,7 +218,7 @@ static GLuint gradient(GLuint vao, GLuint volume, GLint width, GLint height, GLi
   for (GLint z = 0; z < depth; ++z)
   {
     // フレームバッファオブジェクトにカラーバッファとしてアレイテクスチャのレイヤを結合する
-    glFramebufferTexture3D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, tex, 0, z);
+    glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, tex, 0, z);
 
     // 3D テクスチャをクリッピング空間を覆う矩形ポリゴンにマッピングしてレイヤに描画する
     glUniform1f(zLoc, (static_cast<GLfloat>(z) + 0.5f) / static_cast<GLfloat>(depth));
@@ -411,8 +408,8 @@ int main(int argc, const char * argv[])
   GLint mcLoc = glGetUniformLocation(program, "mc");
   GLint vtexLoc = glGetUniformLocation(program, "vtex");
   GLint gtexLoc = glGetUniformLocation(program, "gtex");
-  GLint zLoc = glGetUniformLocation(program, "z");
-  GLint aLoc = glGetUniformLocation(program, "a");
+  GLint spacingLoc = glGetUniformLocation(program, "spacing");
+  GLint thresholdLoc = glGetUniformLocation(program, "threshold");
 
   // ビュー変換行列を mv に求める
   GgMatrix mv = ggTranslate(-0.5f, -0.5f, -2.0f);
@@ -437,7 +434,7 @@ int main(int argc, const char * argv[])
   while (glfwGetWindowParam(GLFW_OPENED))
   {
     // マウスホイールの値
-    GLfloat a = static_cast<GLfloat>(glfwGetMouseWheel()) * 0.01f + 0.5f;
+    GLfloat threshold = static_cast<GLfloat>(glfwGetMouseWheel()) * 0.01f + 0.5f;
 
     // 画面クリア
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -448,7 +445,8 @@ int main(int argc, const char * argv[])
     glUniformMatrix4fv(mcLoc, 1, GL_FALSE, (mp * mv).get());
     glUniform1i(vtexLoc, 0);
     glUniform1i(gtexLoc, 1);
-    glUniform1f(aLoc, a);
+    glUniform1f(spacingLoc, 1.0f / static_cast<GLfloat>(SLICES - 1));
+    glUniform1f(thresholdLoc, threshold);
 
     // 3D テクスチャのマッピング
     glActiveTexture(GL_TEXTURE0);
@@ -460,11 +458,7 @@ int main(int argc, const char * argv[])
 
     // スライスの描画
     glBindVertexArray(vao);
-    for (int i = 0; i < SLICES; ++i)
-    {
-      glUniform1f(zLoc, (static_cast<GLfloat>(i) + 0.5f) / static_cast<GLfloat>(SLICES));
-      glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    }
+    glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, SLICES);
 
     // ダブルバッファリング
     glfwSwapBuffers();
