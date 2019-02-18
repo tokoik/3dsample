@@ -84,7 +84,7 @@ static GLuint volume(GLint width, GLint height, GLint depth, int pattern)
       for (GLint i = 0; i < width; ++i)
       {
         double x = (double)i / (double)width;
-        double t;
+        GLubyte t;
 
         if (pattern == CHECKER)
         {
